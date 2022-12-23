@@ -53,12 +53,6 @@ const digestMessage=async (message)=> {
   return hashHex;
   
 }
-// digestMessage(text)
-// .then((digestHex) => {
-//    res=digestHex
-//    console.log("res: ",digestHex)
-//  }
-//  );
 
 
 class login extends HTMLElement{
@@ -67,11 +61,7 @@ class login extends HTMLElement{
     super();
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    // this.shadowRoot.querySelector("label").innerText=this.getAttribute('label');
-    // this.shadowRoot.querySelector("input").innerHTML = this.getAttribute('input');
-    // this.shadowRoot.querySelector(".error").innerHTML = this.getAttribute('error');
-    // this.shadowRoot.querySelector("button").innerHTML = this.getAttribute('button');
-    // this.shadowRoot.querySelector("type").innerHTML = this. getAttribute('type');
+   
     this.$label = this.shadowRoot.querySelector("label");
     this.$input = this.shadowRoot.querySelector("input");
     this.$name = this.shadowRoot.querySelector("name");
@@ -79,7 +69,7 @@ class login extends HTMLElement{
 }
 
 static get observedAttributes() {
-  return ["value", "label", "type", "error-message", "invalid","name"];
+  return ["value", "label", "type", "invalid"];
 }
 attributeChangedCallback(name, oldValue, newValue) {
   switch (name) {
@@ -88,9 +78,6 @@ attributeChangedCallback(name, oldValue, newValue) {
       break;
     case "type":
       this.$input.type = newValue;
-      break;
-    case "error-message":
-      this.$error.innerText = newValue;
       break;
     case "invalid":
       this._handleInvalidState(newValue);
@@ -131,9 +118,7 @@ connectedCallback() {
        );
         this.value = pass;
         
-        // console.log("res1",res)
-        // console.log('hashed password : ',digestMessage(password))
-        // console.log('password value',this.value)
+        
       }
     });
   }
@@ -173,15 +158,6 @@ set value(newValue) {
   this.setAttribute("value", newValue);
 }
 
-// _handleInvalidState(value) {
-//   if (value !== null) {
-//     this.$error.classList.remove("hidden");
-//     this.$input.classList.add("invalid-field");
-//   } else {
-//     this.$error.classList.add("hidden");
-//     this.$input.classList.remove("invalid-field");
-//   }
-// }
 
 
 
